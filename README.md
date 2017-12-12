@@ -33,15 +33,36 @@ To install pushbullet simply type:
 pip install pushbullet.py
 ```
 
-What things you need to install the software and how to install them
+Everything else you need to run this script should be loaded with python, but as in all things - your milage may vary!
 
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+By default, this script lives under my root directory:
+```
+/root/check_external_ip_work
+```
+However it should be able to run anywhere you would like it to run or that your user has permission to read and write since it uses python's ConfigParser.
+
+To install, simply download the tarball or git clone the repository. Once you have placed it to where you would like it, you need to modify the checkip_data configuration file. 
+
+```
+[system_settings]
+debug = True
+pbapi = x.xxxxxxxxxxxxxxxxxxxxxxxx
+current_external_ip = 00.00.00.00
+alert_email = youraddress@email.com
+check_url = www.google.com
+noip = False
+
+[noip_settings]
+hostname = some_hostname@ddns.com
+username = my_username
+password = my_password
+```
+
+If you plan on using PushBullet then you need to 
+
 
 Say what the step will be
 
