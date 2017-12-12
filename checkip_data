@@ -1,13 +1,17 @@
 [system_settings]
 debug = True
-pbapi = x.xxxxxxxxxxxxxxxxxxxxxxxx 
-current_external_ip = 00.00.00.00
-alert_email = youraddress@email.com
+pbapi = x.xxxxxxxxxxxxxxxxxxxxxxxx
+current_external_ip = 0.0.0.0
+alert_email = some_email@your_domain.com
 check_url = www.google.com
-noip = False
+
+[notifications]
+alerting = True
+noip = True
+pb = True
+email = True
 
 [noip_settings]
-hostname = some_hostname@ddns.com
-username = my_username
-password = my_password
-
+hostname = yourdomain.ddns.net
+username = your_login_name
+password = your_login_password
