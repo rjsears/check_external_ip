@@ -19,7 +19,7 @@ This script should run on any system that can run python. I am running this on a
 
 * [pushbullet](https://github.com/randomchars/pushbullet.py) - Python script to interact with PushBullet
 
-In order to use the API you need an API key that can be obtained
+* In order to use the API you need an API key that can be obtained
 [here](https://www.pushbullet.com/account). This is user specific andis used instead of passwords.
 
 To install pushbullet simply type:
