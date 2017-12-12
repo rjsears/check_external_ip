@@ -84,7 +84,10 @@ To run the script via crontab, issue the crontab command for your system ex:```c
 */5 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1
 ```
 ### CLI
-You can also call the script directly from the command line if you wish
+You can also call the script directly from the command line if you wish:
+```
+root scruffy: check_external_ip_work #  ./check_external_ip.py
+```
 
 
 
