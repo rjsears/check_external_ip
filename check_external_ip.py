@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 __author__ = 'Richard J. Sears'
-VERSION = "0.2 (2017-12-12)"
+VERSION = "0.3 (2017-12-12)"
 
 # richard@sears.net
 
@@ -35,13 +35,13 @@ log = syslog.syslog
 
 # Setup to read and write to our data file:
 def read_data(file, section, status):
-    pathname = '/root/check_external_ip_work/' + file
+    pathname = '/root/check_external_ip/' + file
     config.read(pathname)
     current_status = config.get(section, status)
     return current_status
 
 def update_data(file, section, status, value):
-    pathname = '/root/check_external_ip_work/' + file
+    pathname = '/root/check_external_ip/' + file
     config.read(pathname)
     cfgfile = open(pathname, 'w')
     config.set(section, status, value)
@@ -64,7 +64,7 @@ def send_email(recipient, subject, body):
 
 # Are we in DEBUG mode?
 def check_debug():
-    DEBUG = read_data("checkip_data", "system_settings", "DEBUG")
+    DEBUG = read_data("checkip_data", "system_settings", "debug")
     if DEBUG == "True":
         return True
     else:
@@ -72,8 +72,32 @@ def check_debug():
 
 # Are we using noip.com?
 def check_noip():
-    NOIP = read_data("checkip_data", "system_settings", "NOIP")
+    NOIP = read_data("checkip_data", "notifications", "noip")
     if NOIP == "True":
+        return True
+    else:
+        return False
+
+# Are we using PushBullet?
+def check_pushbullet():
+    PUSHBULLET = read_data("checkip_data", "notifications", "pb")
+    if PUSHBULLET == "True":
+        return True
+    else:
+        return False
+
+# Are we using EMail?
+def check_email():
+    EMAIL = read_data("checkip_data", "notifications", "email")
+    if EMAIL == "True":
+        return True
+    else:
+        return False
+
+# Do we want to do any alerting at all?
+def check_alerting():
+    ALERTING = read_data("checkip_data", "notifications", "alerting")
+    if ALERTING == "True":
         return True
     else:
         return False
@@ -94,6 +118,7 @@ def check_internet():
 def check_ip():
     DEBUG = check_debug()
     NOIP = check_noip()
+    ALERTING = check_alerting()
     current_external_ip = read_data("checkip_data", "system_settings", "current_external_ip")
     global myip
     myip = ipgetter.myip()
@@ -105,7 +130,8 @@ def check_ip():
         log('New External IP Address: {ip}'.format(ip=myip))
         if DEBUG:
             print("WARNING. Your External IP Address has changed!")
-        send_ip_warning()
+        if ALERTING:    
+            send_ip_warning()
         if NOIP:
             update_noip()
         update_data("checkip_data", "system_settings", "current_external_ip", myip)
@@ -116,10 +142,15 @@ def check_ip():
 # Here is where we send PB and EMail warnings if our IP address has changed.
 def send_ip_warning():
     global myip
-    alert_email = read_data("checkip_data", "system_settings", "alert_email")
-    send_push("Your External IP has Changed","Your new IP is %s" % myip)
-    send_email(alert_email, 'External IP Change', 'Your New IP is %s' %myip) 
-
+    EMAIL = check_email()
+    PUSHBULLET = check_pushbullet()
+    if EMAIL:
+        alert_email = read_data("checkip_data", "system_settings", "alert_email")
+        send_email(alert_email, 'External IP Change', 'Your New IP is %s' %myip) 
+        log('Alert Email Sent to: {email_addr}'.format(email_addr=alert_email))
+    if PUSHBULLET:
+        send_push("Your External IP has Changed","Your new IP is %s" % myip)
+        log('PushBullet Alert Sent')
 
 # Here is where we update noip.com if we are using this service
 def update_noip():
