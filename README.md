@@ -36,7 +36,7 @@ pip install pushbullet.py
 Everything else you need to run this script should be loaded with python, but as in all things - your milage may vary!
 
 
-### Installing
+## Installing
 
 By default, this script lives under my root directory:
 ```
