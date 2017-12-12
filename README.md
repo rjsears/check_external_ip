@@ -44,22 +44,32 @@ By default, this script lives under my root directory:
 ```
 However it should be able to run anywhere you would like it to run or that your user has permission to read and write since it uses python's ConfigParser.
 
-To install, simply download the tarball or git clone the repository. Once you have placed it to where you would like it, you need to modify the checkip_data configuration file. 
+To install, simply download the tarball or git clone the repository. Once you have placed it to where you would like it, you need to modify the checkip_data configuration file:
 
 ```
 [system_settings]
 debug = True
 pbapi = x.xxxxxxxxxxxxxxxxxxxxxxxx
-current_external_ip = 00.00.00.00
-alert_email = youraddress@email.com
+current_external_ip = 0.0.0.0
+alert_email = some_email@your_domain.com
 check_url = www.google.com
-noip = False
+
+[notifications]
+alerting = True
+noip = True
+pb = True
+email = True
 
 [noip_settings]
-hostname = some_hostname@ddns.com
-username = my_username
-password = my_password
+hostname = yourdomain.ddns.net
+username = your_login_name
+password = your_login_password
 ```
+
+
+The setting should be pretty self explanatory:
+* If you plan on using PushBullet you need to enter your PushBullet API in the ```pbapi``` field
+
 
 If you plan on using PushBullet then you need to 
 
