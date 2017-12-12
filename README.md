@@ -75,7 +75,20 @@ You also need to enter the email address to which you want to receive alerts: ``
 * If you want to use noip.com this requires either a free or paid account. Once your account is setup, change the settings under the ```noip_settings``` section to match your noip.com account.
 
 
-If you plan on using PushBullet then you need to 
+
+## Logging
+By default the script logs to syslog ```/var/log/syslog```, but only when there is a change. If you have an IP address change, and depending on the configuration options you have selected, this is what your logfile entry should look like:
+
+```
+Dec 12 15:26:15 scruffy check_external_ip.py: WARNING: External IP Address Change Detected!
+Dec 12 15:26:15 scruffy check_external_ip.py: Old External IP Address: 0.0.0.0
+Dec 12 15:26:15 scruffy check_external_ip.py: New External IP Address: 64.233.97.222
+Dec 12 15:26:16 scruffy check_external_ip.py: Alert Email Sent to: my_email_address@gmail.com
+Dec 12 15:26:17 scruffy check_external_ip.py: PushBullet Alert Sent
+Dec 12 15:26:17 scruffy check_external_ip.py: Updating:  www.noip.com account:
+Dec 12 15:26:17 scruffy check_external_ip.py: >>> NEW IP: 64.233.97.222
+Dec 12 15:26:17 scruffy check_external_ip.py: >>> No-IP Update Succeed: yes
+```
 
 
 Say what the step will be
