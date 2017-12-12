@@ -68,7 +68,11 @@ password = your_login_password
 
 
 The setting should be pretty self explanatory:
+* If you want to do **any** alerting, ```alerting``` needs to be set to ``` alerting = True``` 
 * If you plan on using PushBullet you need to enter your PushBullet API in the ```pbapi``` field
+* If you want to use email alerting you need to enter ```True``` in the email field: ```email = True```
+You also need to enter the email address to which you want to receive alerts: ```alert_email = some_email@your_domain.com```. This is setup to use the local system ```mail``` command so your local system must be able to send email already via the builtin ```mail``` command. If it cannot, this will not work for you.
+* If you want to use noip.com this requires either a free or paid account. Once your account is setup, change the settings under the ```noip_settings``` section to match your noip.com account.
 
 
 If you plan on using PushBullet then you need to 
