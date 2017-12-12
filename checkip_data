@@ -1,0 +1,13 @@
+[system_settings]
+debug = True
+pbapi = x.xxxxxxxxxxxxxxxxxxxxxxxx 
+current_external_ip = 00.00.00.00
+alert_email = youraddress@email.com
+check_url = www.google.com
+noip = False
+
+[noip_settings]
+hostname = some_hostname@ddns.com
+username = my_username
+password = my_password
+
