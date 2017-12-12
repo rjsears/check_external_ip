@@ -19,16 +19,8 @@ This script should run on any system that can run python. I am running this on a
 
 * [pushbullet](https://github.com/randomchars/pushbullet.py) - Python script to interact with PushBullet
 
-This is a python library for the wonderful
-`Pushbullet <https://www.pushbullet.com>`__ service. It allows you to
-send push notifications to
-`Android <https://play.google.com/store/apps/details?id=com.pushbullet.android>`__
-and `iOS <https://itunes.apple.com/us/app/pushbullet/id810352052>`__
-devices.
-
 In order to use the API you need an API key that can be obtained
-`here <https://www.pushbullet.com/account>`__. This is user specific and
-is used instead of passwords.
+[here](https://www.pushbullet.com/account). This is user specific andis used instead of passwords.
 
 To install pushbullet simply type:
 ```
