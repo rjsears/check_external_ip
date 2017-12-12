@@ -44,7 +44,10 @@ By default, this script lives under my root directory:
 ```
 However it should be able to run anywhere you would like it to run or that your user has permission to read and write since it uses python's ConfigParser.
 
-To install, simply download the tarball or git clone the repository. Once you have placed it to where you would like it, you need to modify the checkip_data configuration file:
+To install, simply download the tarball or git clone the repository. Once you have placed it to where you would like it, you need to make it executable:
+``` chmod +x check_external_ip.py ```
+
+You then need to modify the checkip_data configuration file:
 
 ```
 [system_settings]
@@ -73,6 +76,15 @@ The setting should be pretty self explanatory:
 * If you want to use email alerting you need to enter ```True``` in the email field: ```email = True```
 You also need to enter the email address to which you want to receive alerts: ```alert_email = some_email@your_domain.com```. This is setup to use the local system ```mail``` command so your local system must be able to send email already via the builtin ```mail``` command. If it cannot, this will not work for you.
 * If you want to use noip.com this requires either a free or paid account. Once your account is setup, change the settings under the ```noip_settings``` section to match your noip.com account.
+
+## Running
+### crontab
+To run the script via crontab, issue the crontab command for your system ex:```crontab -e``` and edit your crontab file to reflect the time and directory where you have installed the script:
+```
+*/5 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1
+```
+### CLI
+You can also call the script directly from the command line if you wish
 
 
 
