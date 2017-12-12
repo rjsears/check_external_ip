@@ -17,10 +17,16 @@ This script should run on any system that can run python. I am running this on a
 
 - Utilizes a list of websites that provide this service and randomaly grabs one to use. I had issues with a few of the websites and had to edit the script to get it to work correctly. In once case, one of the websites actually returned my "local" IP which caused some interesting problems until I figured out which one it was. The ipgetter script has a builtin test you can run to check all websites for accuracy and to help you clean up the list. The list of websites that I use are listed in (list_of_ip_websites).  
 
+To install ipgetter simply type:
+```
+pip install ipgetter
+```
+
+
 * [pushbullet](https://github.com/randomchars/pushbullet.py) - Python script to interact with PushBullet
 
-* In order to use the API you need an API key that can be obtained
-[here](https://www.pushbullet.com/account). This is user specific andis used instead of passwords.
+* In order to use the PushBullet API you need an API key that can be obtained
+[here](https://www.pushbullet.com/account). This is user specific and is used instead of passwords.
 
 To install pushbullet simply type:
 ```
