@@ -111,7 +111,7 @@ Dec 12 15:26:17 scruffy check_external_ip.py: >>> No-IP Update Succeed: yes
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the MIT License for details
 
 ## Acknowledgments
 
