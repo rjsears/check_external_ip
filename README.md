@@ -3,12 +3,20 @@ check_external_ip.py
 
 This script is designed to be run from behind a network that utilizes a dynamic IP address for the external IP. I have several scripts and systems that require access to my devices behind my firewall and they utilize the external IP address to make these connections. Since the cable provider changes our IP address on a semi-regular basis, I decided to write a script that did everything that I needed it to do in our situation. This includes updating my noip.com account that I use for dynamic DNS services.
 
-When you run the script, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipgetter. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file.  
+This script can be configured and run in three different modes: 
+* Standalone - Script is configured and run on a single system.
+* Primary - Script is setup as the Primary script in a Primary/Backup configuration.
+* Backup - Script is configured as the backup and will not check it's IP so long as the Primary reports its success. 
 
+### Standalone
+When you run the script in Standalone mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipgetter. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file.  
 
-## Getting Started
+### Primary
+When you run the script in Primary mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipgetter. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file. Once it has completed it's check, it will notify the backup system (utilizing ssh to touch a checkfile) that is has completed it's checks.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Backup
+When you run the script in Backup mode it will check to see if the configured checkfile exists. This checkfile will only exist if the Primary has completed a sucessful check. If the checkfile exists, the script removes the checkfile and quits. If the checkfile does not exist, then the scripts assumes that the Primary failed (system crashed, etc) and it will revert it's operation to standalone mode until such time as the Primary comes back online.
+
 
 ### Prerequisites
 This script should run on any system that can run python. I am running this on a Raspberry Pi3 utilizing Python 2.7.9. The only things that I added to my python install that I user are:
