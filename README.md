@@ -43,11 +43,11 @@ To install pushbullet simply type:
 pip install pushbullet.py
 ```
 
-Everything else you need to run this script should be loaded with python, but as in all things - your milage may vary!
-
 * SSH
 In order for the scripts to operate in Primary/Backup roles, ssh is used to touch a checkfile on the backup system. As a result, you will need to configure ssh for a passwordless, key-based operation. You should be fully aware of any security risks associated with utilizing ssh in this manner and it is recommended that you do not use the root account when you operate in this manner.
 [HERE](https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/) is a great tutorial on setting up passwordless ssh sessions. If you plan to operate in Standalone mode, this is not necessary.
+
+> Everything else you need to run this script **should** be loaded with python, but as in all things - your milage may vary!
 
 ## Installing
 
