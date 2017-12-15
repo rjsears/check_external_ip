@@ -181,4 +181,3 @@ This project is licensed under the MIT License - see the MIT License for details
 * [Phoemur](https://github.com/phoemur) - ipgetter
 * [Randomchars](https://github.com/randomchars) - pushbullet.py
 * My amazing family that puts up with all of my coding projects!
-
