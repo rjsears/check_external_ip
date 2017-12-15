@@ -128,10 +128,10 @@ To run the script via crontab, issue the crontab command for your system ex:```c
 >NOTE: If you are running in Primary/Backup mode, then you want to make sure that your Primary server always runs first as this will create the checkfile on the backup system letting it know that it has already been successful. I would recommend getting the scripts setup the way you want them, test them both to make sure they work properly (test the backup first, it reverts to standalone mode if it does not see a checkfile) and once you verify that everything works, setup your crontab to have the scripts one minute apart. Once you have done this, manually run the script on the **primary** system and this will create the checkfile on the backup system.
 
 > ### Primary Cron Entry:
->1,6,11,16,21,26,31,36,41,46,51,56 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1
+>```1,6,11,16,21,26,31,36,41,46,51,56 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1```
 
 > ### Backup Cron Entry:
->2,7,12,17,22,27,32,37,42,47,52,57 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1
+>```2,7,12,17,22,27,32,37,42,47,52,57 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1```
 
 ### CLI
 You can also call the script directly from the command line if you wish:
