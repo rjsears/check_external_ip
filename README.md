@@ -1,12 +1,14 @@
 check_external_ip.py
 ====================
 
+> Version 0.3 Updated 12/14/2017
+
 This script is designed to be run from behind a network that utilizes a dynamic IP address for the external IP. I have several scripts and systems that require access to my devices behind my firewall and they utilize the external IP address to make these connections. Since the cable provider changes our IP address on a semi-regular basis, I decided to write a script that did everything that I needed it to do in our situation. This includes updating my noip.com account that I use for dynamic DNS services.
 
-This script can be configured and run in three different modes: 
+This script can be configured to run in three different modes: 
 * Standalone - Script is configured and run on a single system.
 * Primary - Script is setup as the Primary script in a Primary/Backup configuration.
-* Backup - Script is configured as the backup and will not check it's IP so long as the Primary reports its success. 
+* Backup - Script is configured as the backup and will not check it's IP so long as the Primary reports its success. Designed to be run on two different system and in the event the Primary system fails to report a success to the backup system, the backup system will run the check.
 
 ### Standalone
 When you run the script in Standalone mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipgetter. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file.  
@@ -43,6 +45,9 @@ pip install pushbullet.py
 
 Everything else you need to run this script should be loaded with python, but as in all things - your milage may vary!
 
+* SSH
+In order for the scripts to operate in Primary/Backup roles, ssh is used to touch a checkfile on the backup system. As a result, you will need to confiure ssh for a passwordless, key-based operation. You should be fully aware of any security risks associated with utilizing ssh in this manner and it is recommended that you do not use the root account when you operate in this manner.
+[HERE](https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/) is a great tutorial on setting up passwordless ssh sessions.
 
 ## Installing
 
