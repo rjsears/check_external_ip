@@ -133,6 +133,8 @@ To run the script via crontab, issue the crontab command for your system ex:```c
 > ### Backup Cron Entry:
 >```2,7,12,17,22,27,32,37,42,47,52,57 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1```
 
+> I might also recommend running NTP on your systems to make sure the clocks are accurate!
+
 ### CLI
 You can also call the script directly from the command line if you wish:
 ```
