@@ -14,12 +14,8 @@ VERSION = "0.3 (2017-12-14)"
 # update noip.com on the fly.
 
 ## USAGE
-# Make the necessary changes to the "checkip_data" file. This is the config
-# file that we read and write date to for this script.
-
-# Call the script directly or from cron:
-## */5 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1
-
+## For complete instructions please see:
+## https://github.com/rjsears/check_external_ip/blob/master/README.md
 
 ## Version 0.3 Updates
 ## Added ability to run a primary and a backup script on different servers.
