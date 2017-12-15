@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 __author__ = 'Richard J. Sears'
-VERSION = "0.3 (2017-12-12)"
+VERSION = "0.3 (2017-12-14)"
 
 # richard@sears.net
 
@@ -20,6 +20,11 @@ VERSION = "0.3 (2017-12-12)"
 # Call the script directly or from cron:
 ## */5 * * * * /usr/bin/python /root/check_external_ip_work/check_external_ip.py > /dev/null 2>&1
 
+
+## Version 0.3 Updates
+## Added ability to run a primary and a backup script on different servers.
+
+
 # Manage Imports
 import ipgetter
 from pushbullet import Pushbullet
@@ -28,6 +33,7 @@ import ConfigParser
 import httplib
 import syslog
 import requests
+import os
 
 #Housekeeping
 config = ConfigParser.ConfigParser()
@@ -47,6 +53,15 @@ def update_data(file, section, status, value):
     config.set(section, status, value)
     config.write(cfgfile)
     cfgfile.close()
+
+def check_primary():
+    checkfile = read_data("checkip_data", "system_role", "checkfile") 
+    if os.path.isfile('%s' % checkfile):
+    #if os.path.isfile('/root/check_external_ip/primary_is_active'):
+        primary_server = "Active"
+    else:
+        primary_server = "Fail"
+    return primary_server
 
 
 # We use Push Bullet to send out all of our alerts
@@ -101,7 +116,11 @@ def check_alerting():
         return True
     else:
         return False
-
+'''
+def check_system_role():
+    system_role = read_data("checkip_data" , "system_role" , "role")
+    if system_role == "primary":
+'''    
 # Do we have internet access?
 def check_internet():
     check_url = read_data("checkip_data", "system_settings", "check_url")
@@ -172,16 +191,45 @@ def update_noip():
     log('>>> No-IP Update Succeed: {success}'.format(success=success))
 
 
+#checkfile = read_data("checkip_data", "system_role", "checkfile")
+#    if os.path.isfile('%s' % checkfile):
+
+
 def main():
     DEBUG = check_debug()
     if DEBUG:
         print("Starting check_external_ip.py")
+    system_role = read_data("checkip_data", "system_role", "role")
+    if system_role == "standalone":
+        pass
+    elif system_role == "primary":
+        if DEBUG:
+            print("We are the Primary System")
+    else:
+        print("We are the Backup System")
+        primary_server_active = check_primary()
+        if primary_server_active == "Active":
+	    checkfile = read_data("checkip_data", "system_role", "checkfile")
+            if DEBUG:
+                print("Primary Server is Active: Exiting")
+            os.remove('%s' % checkfile)
+            quit()
     internet_active = check_internet()
     if internet_active:
         check_ip()
+	if system_role == "primary":
+            backup_host = read_data("checkip_data", "system_role", "backup_host") 
+            if DEBUG:
+                print("Notifing Backup System of Success!")
+	    try:
+		checkfile = read_data("checkip_data", "system_role", "checkfile")
+                subprocess.check_output(['ssh', backup_host, 'touch %s' % checkfile])
+            except subprocess.CalledProcessError as e:
+                print (e.output) 
     else:
         if DEBUG:
             print("Not detecting Internet access, quitting!")
+            log('ERROR: No Internet Access Detected: Exiting!')
         quit()
 
 

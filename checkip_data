@@ -15,3 +15,8 @@ email = True
 hostname = yourdomain.ddns.net
 username = your_login_name
 password = your_login_password
+
+[system_role]
+role = backup
+backup_host = scruffy
+checkfile = /root/check_external_ip_work/primary_is_active
