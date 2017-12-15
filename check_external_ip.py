@@ -54,10 +54,10 @@ def update_data(file, section, status, value):
     config.write(cfgfile)
     cfgfile.close()
 
+# What file do we check for if we are the backup?
 def check_primary():
     checkfile = read_data("checkip_data", "system_role", "checkfile") 
     if os.path.isfile('%s' % checkfile):
-    #if os.path.isfile('/root/check_external_ip/primary_is_active'):
         primary_server = "Active"
     else:
         primary_server = "Fail"
@@ -116,11 +116,8 @@ def check_alerting():
         return True
     else:
         return False
-'''
-def check_system_role():
-    system_role = read_data("checkip_data" , "system_role" , "role")
-    if system_role == "primary":
-'''    
+
+
 # Do we have internet access?
 def check_internet():
     check_url = read_data("checkip_data", "system_settings", "check_url")
@@ -142,7 +139,7 @@ def check_ip():
     global myip
     myip = ipgetter.myip()
     if DEBUG:
-        print(myip)
+        print("Our external IP is: ", myip)
     if myip != current_external_ip:
         log('WARNING: External IP Address Change Detected!')
         log('Old External IP Address: {oldip}'.format(oldip=current_external_ip))
@@ -191,10 +188,6 @@ def update_noip():
     log('>>> No-IP Update Succeed: {success}'.format(success=success))
 
 
-#checkfile = read_data("checkip_data", "system_role", "checkfile")
-#    if os.path.isfile('%s' % checkfile):
-
-
 def main():
     DEBUG = check_debug()
     if DEBUG:
@@ -206,7 +199,8 @@ def main():
         if DEBUG:
             print("We are the Primary System")
     else:
-        print("We are the Backup System")
+        if DEBUG:
+            print("We are the Backup System")
         primary_server_active = check_primary()
         if primary_server_active == "Active":
 	    checkfile = read_data("checkip_data", "system_role", "checkfile")
