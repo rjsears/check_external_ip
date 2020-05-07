@@ -1,7 +1,7 @@
 check_external_ip.py
 ====================
 
-> Version 0.3 Updated 12/14/2017
+> Version 0.4 Updated May 7th, 2020
 
 This script is designed to be run from behind a network that utilizes a dynamic IP address for the external IP. I have several scripts and systems that require access to my devices behind my firewall and they utilize the external IP address to make these connections. Since the cable provider changes our IP address on a semi-regular basis, I decided to write a script that did everything that I needed it to do in our situation. This includes updating my noip.com account that I use for dynamic DNS services.
 
@@ -23,15 +23,7 @@ When you run the script in Backup mode it will check to see if the configured ch
 ### Prerequisites
 This script should run on any system that can run python. I am running this on a Raspberry Pi3 utilizing Python 2.7.9. The only things that I added to my python install that I user are:
 
-* [ipgetter](https://github.com/phoemur/ipgetter) - Python scrip that gets current external IP address. 
-
-- Utilizes a list of websites that provide this service and randomaly grabs one to use. I had issues with a few of the websites and had to edit the script to get it to work correctly. In once case, one of the websites actually returned my "local" IP which caused some interesting problems until I figured out which one it was. The ipgetter script has a builtin test you can run to check all websites for accuracy and to help you clean up the list. The list of websites that I use are listed in (list_of_ip_websites).  
-
-To install ipgetter simply type:
-```
-pip install ipgetter
-```
-
+* [https://ipify.org](https://ipify.org) - Site used to get our external IP address
 
 * [pushbullet](https://github.com/randomchars/pushbullet.py) - Python script to interact with PushBullet
 
@@ -177,8 +169,6 @@ Dec 12 15:26:17 scruffy check_external_ip.py: >>> No-IP Update Succeed: yes
 This project is licensed under the MIT License - see the MIT License for details
 
 ## Acknowledgments
-
-* [Phoemur](https://github.com/phoemur) - ipgetter
 * [Randomchars](https://github.com/randomchars) - pushbullet.py
 * [Dominick Rivard](https://github.com/drivard) - Code idea on how to update noip.com from his script
 * My amazing family that puts up with all of my coding projects!
