@@ -11,10 +11,10 @@ This script can be configured to run in three different modes:
 * Backup - Script is configured as the backup and will not check it's IP so long as the Primary reports its success. Designed to be run on two different system and in the event the Primary system fails to report a success to the backup system, the backup system will run the check.
 
 #### Standalone
-When you run the script in Standalone mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipgetter. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file.  
+When you run the script in Standalone mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipify.org. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file.  
 
 #### Primary
-When you run the script in Primary mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipgetter. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file. Once it has completed it's check, it will notify the backup system (utilizing ssh to touch a checkfile) that is has completed it's checks.
+When you run the script in Primary mode, it will first check to see if you have internet access before doing anything else. If you do not have internet access, it will quit. If you do have internet access, it will grab your current external IP address utilizing ipify.org. Once it has your external IP address, it will check it against the IP address located in the configuration file. If it is different, it can send you a pushbullet and/or email notification, update an noip.com account and write your new IP address to your configuration file. Once it has completed it's check, it will notify the backup system (utilizing ssh to touch a checkfile) that is has completed it's checks.
 
 #### Backup
 When you run the script in Backup mode it will check to see if the configured checkfile exists. This checkfile will only exist if the Primary has completed a sucessful check. If the checkfile exists, the script removes the checkfile and quits. If the checkfile does not exist, then the scripts assumes that the Primary failed (system crashed, etc) and it will revert it's operation to standalone mode until such time as the Primary comes back online.
@@ -22,8 +22,6 @@ When you run the script in Backup mode it will check to see if the configured ch
 
 ### Prerequisites
 This script should run on any system that can run python. I am running this on a Raspberry Pi3 utilizing Python 2.7.9. The only things that I added to my python install that I user are:
-
-* [https://ipify.org](https://ipify.org) - Site used to get our external IP address
 
 * [pushbullet](https://github.com/randomchars/pushbullet.py) - Python script to interact with PushBullet
 
@@ -80,7 +78,7 @@ checkfile = /root/check_external_ip_work/primary_is_active
 ```
 
 
-The setting should be pretty self explanatory:
+The settings should be pretty self explanatory:
 * If you want to do **any** alerting, ```alerting``` needs to be set to ``` alerting = True``` 
 * If you plan on using PushBullet you need to enter your PushBullet API in the ```pbapi``` field
 * If you want to use email alerting you need to enter ```True``` in the email field: ```email = True```
@@ -162,7 +160,7 @@ Dec 12 15:26:17 scruffy check_external_ip.py: >>> No-IP Update Succeed: yes
 
 ## Authors
 
-* **Richard J. Sears** - *richard@sears.net* - [The RS Technical Group, Inc.](http://github.com/rjsears)
+* **Richard J. Sears** - *richardjsears@gmail.com* - [The RS Technical Group, Inc.](http://github.com/rjsears)
 
 ## License
 
