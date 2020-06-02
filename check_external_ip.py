@@ -36,6 +36,7 @@ import httplib
 import syslog
 import requests
 import os
+import sys
 
 #Housekeeping
 config = ConfigParser.ConfigParser()
@@ -141,7 +142,7 @@ def check_ip():
     global myip
     myip = requests.get('https://api.ipify.org').text
     if myip.find('DOCSTRING') != -1:
-        exit
+        sys.exit()
     if DEBUG:
         print("Our external IP is: ", myip)
     if myip != current_external_ip:
