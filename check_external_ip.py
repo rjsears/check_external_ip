@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 __author__ = 'Richard J. Sears'
-VERSION = "0.4 (2020-05-11)"
+VERSION = "0.5 (2020-06-02)"
 
 # richard@sears.net
 
@@ -16,6 +16,10 @@ VERSION = "0.4 (2020-05-11)"
 ## USAGE
 ## For complete instructions please see:
 ## https://github.com/rjsears/check_external_ip/blob/master/README.md
+
+## Version 0.5 Updates
+## Added check for DOCSTRING return from ipify indicating error in 
+## getting external IP address. Exit when found.
 
 ## Version 0.4 Updates
 ## Removed ipgetter and now utilize https://ipify.org 
@@ -136,6 +140,8 @@ def check_ip():
     current_external_ip = read_data("checkip_data", "system_settings", "current_external_ip")
     global myip
     myip = requests.get('https://api.ipify.org').text
+    if myip.find('DOCSTRING') != -1:
+        exit
     if DEBUG:
         print("Our external IP is: ", myip)
     if myip != current_external_ip:
