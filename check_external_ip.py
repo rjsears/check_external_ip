@@ -19,7 +19,7 @@ VERSION = "0.5 (2020-06-02)"
 
 ## Version 0.5 Updates
 ## Added check for DOCSTRING return from ipify indicating error in 
-## getting external IP address. Exit when found.
+## getting external IP address. Exit when found. Exit will be 0.
 
 ## Version 0.4 Updates
 ## Removed ipgetter and now utilize https://ipify.org 
