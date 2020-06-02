@@ -142,6 +142,7 @@ def check_ip():
     global myip
     myip = requests.get('https://api.ipify.org').text
     if myip.find('DOCSTRING') != -1:
+	log('No IP address found in return, exiting')
         sys.exit()
     if DEBUG:
         print("Our external IP is: ", myip)
