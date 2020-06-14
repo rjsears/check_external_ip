@@ -1,7 +1,7 @@
 check_external_ip.py
 ====================
 
-> Version 0.4 Updated May 7th, 2020
+> Version 0.6 Updated June 14th, 2020
 
 This script is designed to be run from behind a network that utilizes a dynamic IP address for the external IP. I have several scripts and systems that require access to my devices behind my firewall and they utilize the external IP address to make these connections. Since the cable provider changes our IP address on a semi-regular basis, I decided to write a script that did everything that I needed it to do in our situation. This includes updating my noip.com account that I use for dynamic DNS services.
 
