@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 __author__ = 'Richard J. Sears'
-VERSION = "0.5 (2020-06-02)"
+VERSION = "0.6 (2020-07-14)"
 
 # richard@sears.net
 
@@ -16,6 +16,9 @@ VERSION = "0.5 (2020-06-02)"
 ## USAGE
 ## For complete instructions please see:
 ## https://github.com/rjsears/check_external_ip/blob/master/README.md
+
+## Version 0.6 Updates
+## Updated email sending subprocess call for unicode and Python 3.x
 
 ## Version 0.5 Updates
 ## Added check for DOCSTRING return from ipify indicating error in 
@@ -76,8 +79,7 @@ def send_push(title, message):
 
 # Setup to send email via the builtin linux mail command. Your local system should be configured already to send mail.
 def send_email(recipient, subject, body):
-      process = subprocess.Popen(['mail', '-s', subject, recipient],stdin=subprocess.PIPE)
-      process.communicate(body)
+    subprocess.run(['mail', '-s', subject, recipient], input=body, encoding='utf-8')
 
 
 # Are we in DEBUG mode?
